@@ -21,15 +21,26 @@ def get_dataset(isFirst = False, slope = None, constant = None, data_range = Non
     if not slope:
         slope = generate_slope()
 
-    random_error = int(random.random() * data_range * 0.1) 
+ 
 
     x = []
     y = [] 
 
     for item in range(num_data_points):
         x_value = int(random.random() * data_range)
+
+        random_error = int(random.random() * data_range * 0.1) 
         
-        y_value = x_value * slope + constant + random_error
+        # print(type(x_value))
+        # print(type(slope))
+        # print("break")
+
+        y_value = x_value * slope
+        # print(type(y_value))
+        # print(type(constant))
+        # print(type(random_error))
+        y_value += constant + random_error
+        
 
         x += [x_value]
         y += [y_value]

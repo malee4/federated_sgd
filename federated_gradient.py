@@ -17,8 +17,10 @@ for location in range(number_locations):
     # general the x and y dataset for the location
     local_x, local_y = get_dataset(slope = set_slope, constant = set_constant, data_range = set_data_range)
 
-    theta0, theta1, min_error = get_local_gradient(local_x, local_y)
+    theta0, theta1, min_error = get_local_gradient(x = local_x, y = local_y)
     theta0_list += [theta0]
     theta1_list += [theta1]
 
 theta0, theta1 = gradient_aggregate(theta0_list, theta1_list)
+print("Theta 0: %s"%theta0)
+print("Theta 1: %s"%theta1)
