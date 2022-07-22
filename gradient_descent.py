@@ -8,7 +8,6 @@ a = 0.1 # step
 
 # create a sample dataset
 def get_dataset():
-    # generate dataset
     # number of items in the set
     num_data_points = int(random.random() * 50) + 50
     print("Total data points: %s"%num_data_points)
@@ -47,6 +46,7 @@ def get_dataset():
         print(y_val)
 
     return x, y
+    # return [-1, 0, 1, 2], [-1, 2, 5, 8]
 
 # calculate the sum of the difference
 def sum_of_differences(h, x, y, notConstant = False):
@@ -82,7 +82,7 @@ curr_error = sum_of_differences(h, x, y) ** 2
 while curr_error <= min_error:
     
     min_error = curr_error
-    # simultaneously update
+    # simultaneously update the values
     temp_theta0 = theta0 - (1 / float(m)) * a * sum_of_differences(h, x, y)
     temp_theta1 = theta1 - (1 / float(m)) * a * sum_of_differences(h, x, y, notConstant = True)
     theta0 = temp_theta0
@@ -90,8 +90,10 @@ while curr_error <= min_error:
 
     h = lambda x: theta0 + theta1*x
 
+    # calculate the new error with the values
     curr_error = sum_of_differences(h, x, y) ** 2
 
-print("Theta 0 = " + str(theta0))
-print("Theta 1 = " + str(theta1))
+print("Minimum calculated error: %s"%min_error)
+print("Theta 0 = %s"%theta0)
+print("Theta 1 = %s"%theta1)
 
