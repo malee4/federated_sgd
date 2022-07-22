@@ -18,7 +18,7 @@ def sum_of_differences(h, x, y, notConstant = False):
     return sum
 
 # get the dataset 
-def get_local_gradient(isFirst = True, slope = None, constant = None, x = None, y = None, a = 0.1):
+def get_local_gradient(isFirst = False, slope = None, constant = None, x = None, y = None, a = 0.1):
     # if dataset is not given, randomly generate a dataset
     # NOTE: THIS IS NOT CORRECT/DOES NOT COVER ALL CASES
     if (x or y) and len(x) != len(y):
@@ -53,5 +53,8 @@ def get_local_gradient(isFirst = True, slope = None, constant = None, x = None, 
         # calculate the new error with the values
         curr_error = sum_of_differences(h, x, y) ** 2
 
-    return x, y, theta0, theta1, min_error
+    if isFirst: # that is, if no information was passed in
+        return theta0, theta1, min_error, x, y, slope, constant
+    
+    return theta0, theta1, min_error
 

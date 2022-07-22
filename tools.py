@@ -3,16 +3,17 @@ import random
 import numpy as np
 
 # generate the dataset
-def get_dataset(isFirst = True, slope = None, constant = None):
+def get_dataset(isFirst = False, slope = None, constant = None, data_range = None):
     if not isFirst and not (slope and constant):
-        print("Warning: no guarantee of matching dataset for input values")
+        print("Warning: no guarantee of set pattern in dataset for input values")
 
     # number of items in the set
     num_data_points = int(random.random() * 50) + 50
     print("Total data points: %s"%num_data_points)
 
     # get a random range, greater than or equal to 10
-    data_range = int(random.random() * 90) + 10
+    if not data_range:
+        data_range = generate_data_range()
 
     if not constant:
         constant = generate_constant(data_range)
@@ -47,9 +48,12 @@ def generate_constant(data_range):
 
 def generate_slope():
     # generate an approximate slope theta1
-    slope = int(random.random() * 10) + 1 # randomly generate a slope
+    slope = int(random.random() * 11) # randomly generate a slope, slope can be 0
     print("Approximate slope: %s"%slope)
     return slope
+
+def generate_data_range():
+    return int(random.random() * 90) + 10
 
 # print all items from the dataset
 def print_dataset(x, y):
