@@ -1,11 +1,9 @@
 import random
-from setup import get_dataset
+from tools import get_dataset
 
 # arbitrary theta0 and theta1 starting values
 theta0 = 0 # constant term
 theta1 = 0 
-
-a = 0.1 # assumed step
 
 # calculate the sum of the difference
 def sum_of_differences(h, x, y, notConstant = False):
@@ -20,9 +18,18 @@ def sum_of_differences(h, x, y, notConstant = False):
     return sum
 
 # get the dataset 
-def get_local_gradient(x, y):
+def get_local_gradient(isFirst = True, slope = None, constant = None, x = None, y = None, a = 0.1):
+    # if dataset is not given, randomly generate a dataset
+    # NOTE: THIS IS NOT CORRECT/DOES NOT COVER ALL CASES
+    if (x or y) and len(x) != len(y):
+        raise Exception("Please pass in a complete dataset with matching lengths.")
+    elif not x and not y:
+        if isFirst:
+            x, y, slope, constant = get_dataset(isFirst, slope, constant)
+        else:
+            x, y = get_dataset(isFirst, slope, constant)
+    
     # probably not the best version of generating a dataset, but it's fine :)
-
     m = len(x)
 
     temp_theta0 = 0
