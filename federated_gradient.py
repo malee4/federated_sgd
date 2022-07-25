@@ -21,6 +21,7 @@ for location in range(number_locations):
     theta0_list += [theta0]
     theta1_list += [theta1]
 
+
 theta0, theta1 = gradient_aggregate(theta0_list, theta1_list)
 print("Theta 0: %s"%theta0)
 print("Theta 1: %s"%theta1)
