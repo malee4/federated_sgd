@@ -81,3 +81,15 @@ def print_dataset(x, y):
 
 def gradient_aggregate(theta0_list, theta1_list):
     return np.mean(theta0_list), np.mean(theta1_list)
+
+# calculate the sum of the difference
+def sum_of_differences(h, x, y, notConstant = False):
+    sum = 0
+    # sum the difference between the predicted and actual value
+    for i in range(len(x)):
+        temp = h(x[i]) - y[i]
+        if notConstant:
+            sum += temp * x[i]
+        else:
+            sum += temp
+    return sum

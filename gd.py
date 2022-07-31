@@ -1,8 +1,6 @@
 import random
 from tools import get_dataset
 
-
-
 # calculate the sum of the difference
 def sum_of_differences(h, x, y, notConstant = False):
     sum = 0
@@ -16,7 +14,7 @@ def sum_of_differences(h, x, y, notConstant = False):
     return sum
 
 # get the dataset 
-def get_local_gradient(isFirst = False, slope = None, constant = None, x = None, y = None, a = 0.1):
+def get_linear_gradient(isFirst = False, slope = None, constant = None, x = None, y = None, a = 0.1):
     # if dataset is not given, randomly generate a dataset
     # NOTE: THIS IS NOT CORRECT/DOES NOT COVER ALL CASES
     if (x or y) and len(x) != len(y):
