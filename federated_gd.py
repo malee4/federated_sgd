@@ -1,5 +1,5 @@
-from gradient_descent import get_linear_gradient
-from tools import gradient_aggregate, generate_data_range, generate_constant, generate_slope, get_dataset
+from gd import get_linear_gradient
+from linear_tools import gradient_aggregate, generate_data_range, generate_constant, generate_slope, get_dataset
 
 #get_dataset(isFirst = True, slope = None, constant = None, data_range = None)
 

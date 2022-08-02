@@ -1,5 +1,5 @@
 import random
-from tools import get_dataset
+from linear_tools import get_dataset
 
 # calculate the sum of the difference
 def sum_of_differences(h, x, y, notConstant = False):
