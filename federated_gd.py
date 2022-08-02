@@ -1,5 +1,5 @@
-from gradient_descent import get_local_gradient
-from tools import gradient_aggregate, generate_data_range, generate_constant, generate_slope, get_dataset
+from gd import get_linear_gradient
+from linear_tools import gradient_aggregate, generate_data_range, generate_constant, generate_slope, get_dataset
 
 #get_dataset(isFirst = True, slope = None, constant = None, data_range = None)
 
@@ -17,7 +17,7 @@ for location in range(number_locations):
     # general the x and y dataset for the location
     local_x, local_y = get_dataset(slope = set_slope, constant = set_constant, data_range = set_data_range)
 
-    theta0, theta1, min_error = get_local_gradient(x = local_x, y = local_y)
+    theta0, theta1, min_error = get_linear_gradient(x = local_x, y = local_y)
     theta0_list += [theta0]
     theta1_list += [theta1]
 

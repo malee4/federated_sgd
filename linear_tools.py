@@ -81,3 +81,24 @@ def print_dataset(x, y):
 
 def gradient_aggregate(theta0_list, theta1_list):
     return np.mean(theta0_list), np.mean(theta1_list)
+
+# compute mean squared error: NORM(UV-M, 'fro')
+def MSE(U, V, M, obs):
+    s = 0
+    st = 0
+    nSamp = len(obs)
+    for l in range(nSamp):
+        i, j = obs[l]
+        s += (np.dot(U[i, :], V[j, :].T) - M[i, j])**2
+    return np.sqrt(s)
+
+# compute relative Frobenius error: NORM(UV-M, 'fro')/NORM(M, 'fro')
+def RelError(U, V, M, obs):
+    s = 0
+    st = 0
+    nSamp = len(obs)
+    for l in range(nSamp):
+        i, j = obs[l]
+        s += (np.dot(U[i, :], V[j, :].T) - M[i, j])**2
+        st += (M[i, j])**2
+    return np.sqrt(s)/np.sqrt(st)
