@@ -37,13 +37,3 @@ def calculate_local_sgd(M, V, maxiter=100, step=0.1, gamma=0.01, k=10, created_s
 
 
     return local_gradient
-    
-    
-
-
-
-    # for each user's movie preferences (V, userData):
-
-        # calculate partial of users 
-
-        #
