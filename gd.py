@@ -39,7 +39,7 @@ def get_linear_gradient(isFirst = False, slope = None, constant = None, x = None
 
     min_error = sum_of_differences(h, x, y) ** 2
     curr_error = sum_of_differences(h, x, y) ** 2
-
+    
     while curr_error <= min_error:
         min_error = curr_error
         # simultaneously update the values
