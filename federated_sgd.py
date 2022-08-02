@@ -15,10 +15,6 @@ def updateV(LG, V, alpha=0.1, beta=0.01):
         return 
     elif LG[0].size == 0:
         return
-    for i in LG.size:
-        for j in LG[0].size:
 
-    return
-
-
+    V[j, :] -= alpha * (error*U_temp + beta*V[j, :])
 
