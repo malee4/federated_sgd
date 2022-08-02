@@ -5,46 +5,38 @@
 # GitHub Link: https://github.com/lawrencelan97/sgd
 # Paper Published: Spring 2019
 ################################################################################
-
-
-# import packages
 import numpy as np
-from linear_tools import MSE, RelError
+
 
 # create U0, V0, where U = users, V = ratings
 # note V is downloaded at the start
-def calculate_local_sgd(data, V, maxiter=100, alpha=0.1, beta=0.01, k=10, created_sparse_data = False, actual_data = []): # add sparse versus 
-    
-    # conduct preliminary setup
-    N = data.size # matrix size
-    U = np.random.normal(size=(N, k), scale=1/k)
-    LG = np.random.normal(size=(N, k), scale=1/k)
-    # remove this and replace with download V
-    # V = np.random.normal(size=(N, k), scale=1/k) 
-    
-    # for every iteration in amount specified
-    for iteration in range(maxiter):
-        # randomize data, select 10% of items
-        np.random.shuffle(data)
-        selected_updates = data[1:(int)(np.floor(0.1*len(data)))]
+def calculate_local_sgd(M, V, maxiter=100, step=0.1, gamma=0.01, k=10, created_sparse_data = False, actual_data = []): # add sparse versus 
+    # randomly initialize U locally
+    U = np.random.normal(size = (len(M), k), scale = 1/k)
 
-        for l in selected_updates:
-            i, j = l
-            error = ( np.dot(U[i, :], V[j, :].T) - data[i, j] ) 
-            U_temp = np.copy(U[i, :])
-            # update U, equation <1> 
-            U[i, :] -= alpha * (error*V[j, :] + beta*U[i, :])
-            
-            # computer the local gradient
-            LG[j, :] = alpha * (error*U[i,:]) # UNCERTAIN: this update function doesn't reflect the mathematics
+    # to be returned
+    local_gradient = np.zeros(shape = (len(M), len(M[0]))) # what should the dimensions be?
 
-            # calculate local gradient
-            
+    for itr in range(maxiter):
+        for i in range(len(M)):
+            for j in range(len(M[0])):
+                # compute difference
+                difference = np.dot(U[i, :], V[j, :].T)
 
-    return LG
+                # if data exists at i,j
+                if not M[i, j]:
+                    continue
+                # complete partial calculation
+                error = difference - M[i, j]
+
+                # update U
+                U[i, :] -= step * (error*V[j, :] + gamma*U[i, :])
+
+                # calculate some component of the gradient for V
+                local_gradient[i, j] = error * U[i, :] + gamma * V[i, :]
 
 
-    
+    return local_gradient
     
     
 
