@@ -10,13 +10,14 @@ import numpy as np
 
 # create U0, V0, where U = users, V = ratings
 # note V is downloaded at the start
-def calculate_local_sgd(M, V, maxiter=100, step=0.1, gamma=0.01, k=10, created_sparse_data = False, actual_data = []): # add sparse versus 
+def calculate_local_sgd(M, V, maxiter=100, step=0.1, gamma=0.01, k=10): # add sparse versus 
     # randomly initialize U locally
     U = np.random.normal(size = (len(M), k), scale = 1/k)
 
     # to be returned
     local_gradient = np.zeros(shape = (len(M), len(M[0]))) # what should the dimensions be?
 
+    # STILL NEEDED: break function for error below a certain value
     for itr in range(maxiter):
         for i in range(len(M)):
             for j in range(len(M[0])):
@@ -36,4 +37,5 @@ def calculate_local_sgd(M, V, maxiter=100, step=0.1, gamma=0.01, k=10, created_s
                 local_gradient[i, j] = error * U[i, :] + gamma * V[i, :]
 
 
-    return local_gradient
+    return local_gradient.T # 
+
