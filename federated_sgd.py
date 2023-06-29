@@ -45,6 +45,7 @@ if __name__ == '__main__':
     data = pd.read_csv(path)
     
     # clean the data accordingly
+    
 
     M = np.array([]) # put data into M
 
